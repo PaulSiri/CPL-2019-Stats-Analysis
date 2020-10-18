@@ -1,7 +1,7 @@
 # CPL-2019-Stats-Analysis
 2019 Marked the inaugural season of the Canadian Premier League, Canada's new top division soccer/football league. Alongside the end of the season, the league announced that they were making all the game and player data from 2019 public through [Centre Circle Data.](https://canpl.ca/centre-circle-data/)
 
-Recently, I decided to take a look at the database and analyze it using R to identify prospects from across the league!
+Recently, I decided to take a look at the database and analyze it using R to identify attacking prospects from across the league!
 
 ## Expected Goals and Assists
 The database holds a variety of [Opta's advanced statistics](https://www.optasports.com/insight-for-fans/opta-s-event-definitions/), two of the most important being Expected Goals (xG) and Expected Assists (xA). These stats represent the number of goals or assists a player should be expected to make, given the location and type of the shots/passes that a player made (among many other factors).
@@ -50,6 +50,11 @@ On the other end of the spectrum we have Zach Verhoven, a tricky winger for Paci
 There is also Emery Welshman on the far right side, although he is a centre forward, he seems to struggle to get good shots off given the number of touches he is taking in the box. Looking more into his stats, he had 7 big goalscoring chances across the season, and he is underperforming his xG by 2 goals (expected to score 5, only scored 3). Overall, it seems like Welshman's shot taking could be much more efficient. This doesn't mean that Welshman is a bad player by any means, just that he could probably improve his shot volume in the future if coached properly.
 
 ## Conclusion
+Going back to the original goal of this post (_get it_), I would have to say that from the players I assessed, the number one attacking prospect from the 2019 CPL season would have to be Easton Ongaro! He's tall, young, Canadian, and has some of the best goalscoring indicators in the league. If I had to put money on any of the players from this season becoming a real talent in the MLS or Europe, I would put it on Ongaro.
+
+It turns out that he actually has already gotten a loan to the Danish 2nd division with an option to buy in the winter! Best of luck to him.
+
+### Conclusion for Real
 I hope that whoever is reading enjoyed this brief look into the 2019 CPL stats! 
 
 Personally, I had a great time analyzing the data and I'm sure that I'll continue to learn more about football analytics and the power that it has for scouting and coaching!
