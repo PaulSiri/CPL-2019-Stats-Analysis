@@ -1,5 +1,5 @@
 # CPL-2019-Stats-Analysis
-2019 Marked the inaugural season of the Canadian Premier League, Canada's new top division soccer/football league. Alongside the end of the season, the league announced that they were making all the game and player data from 2019 public through [Centre Circle Data.](https://canpl.ca/centre-circle-data/)
+2019 marked the inaugural season of the Canadian Premier League, Canada's new top division soccer/football league. Alongside the end of the season, the league announced that they were making all the game and player data from 2019 public through [Centre Circle Data.](https://canpl.ca/centre-circle-data/)
 
 Recently, I decided to take a look at the database and analyze it using R to identify attacking prospects from across the league!
 
