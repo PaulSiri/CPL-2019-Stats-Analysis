@@ -21,7 +21,7 @@ library(ggrepel)
 ## Loading dataset
 
 ```{r}
-playerTotals <- read.csv("./CPL Player Totals 2019.csv")
+playerTotals <- read.csv("./data/CPL Player Totals 2019.csv")
 ```
 
 ## Calculate Data for Shots on Target and Touches in the Box per 90
