@@ -1,0 +1,68 @@
+---
+title: "Chances and Big Chances Created per 90"
+author: "Paul Siri"
+date: "10/17/2020"
+output: html_document
+fig_height: 8
+fig_width: 16
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 12, fig.height = 8)
+```
+
+## Packages
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggrepel)
+```
+
+## Loading dataset
+
+```{r}
+playerTotals <- read.csv("./CPL Player Totals 2019.csv")
+```
+
+## Adjusting Player Names in Dataset
+
+```{r}
+playerTotals[13, 10] <- "J.Büscher"
+playerTotals[96, 10] <- "D.Choinière"
+playerTotals[117, 10] <- "J.Hernández"
+playerTotals[50, 10] <- "E.Cissé"
+```
+
+
+## Calculate Data for Chances and Big Chances Created per 90
+
+```{r}
+playerTotals %>%
+  mutate(
+    ChanceCrtd90 = if_else(Min == 0, 0, Chance / Min * 90),
+    BgChncCrtd90 = if_else(Min == 0, 0, BgChncCrtd / Min * 90)
+  ) %>% subset(
+    Min>=450
+  )-> playerTotals90
+```
+
+## Plotting the data
+
+```{r pressure, echo=FALSE}
+ggplot(data=playerTotals90, aes(x=ChanceCrtd90,y=BgChncCrtd90, color=team, label=player)) + 
+  labs(
+    title = "Chances and Big Chances Created per 90 for Players with 450+ Minutes",
+    subtitle = "Canadian Premier League 2019",
+    x = "Chances Created per 90 Minutes",
+    y = "Big Chances Created per 90 Minutes") +
+  geom_text_repel(
+    data = subset(playerTotals90, (ChanceCrtd90>1.5 | BgChncCrtd90>0.27)),
+    show.legend = FALSE
+  ) + geom_point() + 
+  geom_hline(yintercept = 0.27, alpha = 0.2) +
+  geom_vline(xintercept = 1.5, alpha = 0.2) +
+  scale_x_continuous(n.breaks = 8) +
+  scale_y_continuous(n.breaks = 7) +
+  scale_color_manual(values=c("#a84241", "#789bba", "#c1713e", "#40b9ca", "#6b4f99", "#b19d6e", "#88bc71")) +
+  theme_classic()
+```

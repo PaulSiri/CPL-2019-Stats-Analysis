@@ -1,0 +1,66 @@
+---
+title: "Expected Goals and Assists per 90"
+author: "Paul Siri"
+date: "10/17/2020"
+output: html_document
+fig_height: 8
+fig_width: 16
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 12, fig.height = 8)
+```
+
+## Packages
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggrepel)
+```
+
+## Loading dataset
+
+```{r}
+playerTotals <- read.csv("./CPL Player Totals 2019.csv")
+```
+
+## Adjusting Player Names in Dataset
+
+```{r}
+playerTotals[13, 10] <- "J.Büscher"
+playerTotals[96, 10] <- "D.Choinière"
+playerTotals[117, 10] <- "J.Hernández"
+```
+
+## Calculate Data for Expected Goals/Assists per 90
+
+```{r}
+playerTotals %>%
+  mutate(
+    ExpG90 = if_else(Min == 0, 0, ExpG / Min * 90),
+    ExpA90 = if_else(Min == 0, 0, ExpA / Min * 90)
+  ) %>% subset(
+    Min>=450
+  )-> playerTotals90
+```
+
+## Plotting the data
+
+```{r pressure, echo=FALSE}
+ggplot(data=playerTotals90, aes(x=ExpA90,y=ExpG90, color=team, label=player)) + 
+  labs(
+    title ="Expected Goals and Assists per 90 for Players with 450+ Minutes",
+    subtitle = "Canadian Premier League 2019 Season",
+    x = "Expected Assists per 90 Minutes",
+    y = "Expected Goals per 90 Minutes") +
+  geom_point() +
+  geom_text_repel(
+    data = subset(playerTotals90, (ExpG90>0.38 | ExpA90>0.19)),
+    show.legend = FALSE) + 
+  geom_hline(yintercept = 0.38, alpha = 0.2) +
+  geom_vline(xintercept = 0.19, alpha = 0.2) +
+  scale_x_continuous(n.breaks = 8) +
+  scale_y_continuous(n.breaks = 7) +
+  scale_color_manual(values=c("#a84241", "#789bba", "#c1713e", "#40b9ca", "#6b4f99", "#b19d6e", "#88bc71")) +
+  theme_classic()
+```
